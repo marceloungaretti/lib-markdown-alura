@@ -1,11 +1,18 @@
 import chalk from 'chalk';
+import fs from 'fs';
 
-console.log(chalk.blue('Hello world!'));
-
-const paragrafo = 'Texto retornado por uma função';
-
-function texto(string){
-    return string;
+function trataErro(erro){
+    throw new Error(chalk.red(erro.code, 'Arquivo não encontrado.'));
 }
 
-console.log(texto(paragrafo));
+async function pegaArquivo(caminhoDoArquivo){
+    const encoding = 'utf-8';
+    try {
+    const texto = await fs.promises.readFile(caminhoDoArquivo, encoding);
+    console.log(chalk.green(texto))
+    } catch(erro) {
+        trataErro(erro);
+    }
+}
+
+pegaArquivo('./arquivos/texto1.md');
