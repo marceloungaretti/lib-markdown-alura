@@ -12,7 +12,7 @@ function extraiLinks(texto) {
     });
   }
 
-  return arrayResultados;
+  return arrayResultados.length === 0 ? 'Não há links' : arrayResultados;
 }
 
 function trataErro(erro) {
@@ -23,12 +23,10 @@ async function pegaArquivo(caminhoDoArquivo) {
   const encoding = "utf-8";
   try {
     const texto = await fs.promises.readFile(caminhoDoArquivo, encoding);
-    console.log(extraiLinks(texto));
+    return extraiLinks(texto);
   } catch (erro) {
     trataErro(erro);
   }
 }
-
-// pegaArquivo("./arquivos/texto1.md");
 
 export default pegaArquivo;
