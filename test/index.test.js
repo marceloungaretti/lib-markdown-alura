@@ -16,4 +16,8 @@ describe("pegaArquivo()", () => {
     );
     expect(resultado).toEqual(arrayResult);
   });
+  it('deve retornar mensagem "Não há links"', async () => {
+    const resultado = await pegaArquivo("G:/lib-markdown/test/arquivos/texto1_semlinks.md")
+    expect(resultado).toBe('Não há links');
+  });
 });
